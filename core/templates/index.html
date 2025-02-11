@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <meta charset="utf-8">
+        <title>Uploader</title>
+    </head>
+    <body>
+        <h1>Escolha seu arquivo</h1>
+        <form enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {{ fileForm }}
+            <p></p>
+            <input type="submit" value="Enviar">
+        </form>
+        <p id="message"></p>
+
+
+    {{ status|json_script:"status" }}
+    <script src="{% static 'index.js' %}"></script>
+    </body>
+</html>
