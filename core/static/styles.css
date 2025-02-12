@@ -1,0 +1,64 @@
+
+.container{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.spacer{
+    height: 10vw;
+    width: 10vw;
+}
+
+body{
+    background-color: #1b3d9b;
+    color: white
+}
+
+input[type=submit]{
+    width: 30vw;
+    height: 15vw;
+    color: white;
+    background-color: #707070;
+    border: 4px;
+    border-color: #808080;
+    border-style: solid;
+}
+
+input[type=file]{
+    background-image: url('icons/file-add.svg');
+    background-size: 95%;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: black;
+    filter: invert();
+    width: 60vw;
+    height: 60vw;
+}
+
+input[type=file]::file-selector-button{
+    display: none;
+}
+
+
+@media only screen and (min-width: 720px) {
+    input[type=submit]{
+        width: 15%;
+        height: fit-content;
+    }
+
+    input[type=file]{
+        width: 15vw;
+        height: 15vw;
+    }
+    .spacer{
+        height: 1vw;
+        width: 1vw;
+    }
+
+}

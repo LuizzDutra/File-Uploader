@@ -1,22 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        {% load static %}
         <link rel="stylesheet" href="{% static 'styles.css' %}">
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Uploader</title>
     </head>
     <body>
-        <h1>Escolha seu arquivo</h1>
-        <form enctype="multipart/form-data" method="post">
-            {% csrf_token %}
-            {{ fileForm }}
-            <p></p>
-            <input type="submit" value="Enviar">
-        </form>
-        <p id="message"></p>
-
-
+        <p class="spacer"></p>
+        <h1 class="container center">Escolha seu arquivo</h1>
+        <br>
+        <div class="container center">
+            <form enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                {{ fileForm }}
+                <br>
+                <input type="submit" value="Enviar">
+            </form>
+            <p id="message"></p>
+        </div>
+    <script>
+        var checkIcon = "{% static 'icons/check.svg' %}";
+    </script>
     {{ status|json_script:"status" }}
     <script src="{% static 'index.js' %}"></script>
     </body>

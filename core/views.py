@@ -7,8 +7,11 @@ def index(request):
     context = {'fileForm': forms.ModelFileForm(), 'status': 0}
     if request.method == "POST":
         fileForm = forms.ModelFileForm(request.POST, request.FILES)
+        files = request.FILES.getlist('file')
         if fileForm.is_valid():
-            fileForm.save()
+            for f in files:
+                instance = models.FileModel(file=f)
+                instance.save()
             context['status'] = 1
         else:
             context['status'] = -1
