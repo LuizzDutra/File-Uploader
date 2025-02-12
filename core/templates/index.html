@@ -9,14 +9,14 @@
     </head>
     <body>
         <p class="spacer"></p>
-        <h1 class="container center">Escolha seu arquivo</h1>
+        <h1 class="container center">Choose your File</h1>
         <br>
         <div class="container center">
             <form enctype="multipart/form-data" method="post">
                 {% csrf_token %}
                 {{ fileForm }}
                 <br>
-                <input type="submit" value="Enviar">
+                <input type="submit" value="Send">
             </form>
             <p id="message"></p>
         </div>
