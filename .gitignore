@@ -172,4 +172,5 @@ cython_debug/
 
 
 #uploaded files
-uploads/
+uploads/.
+servings/.
