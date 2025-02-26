@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, FileResponse, HttpResponseRedirect
 from . import models
 from . import forms
-import os, io
-import zipfile
+import os
+from .utils import zip_files
 
 
 class MainPage:
@@ -31,15 +31,13 @@ class MainPage:
             if len(listed_files) == 0:
                 MainPage.context['download_status'] = 0
                 return HttpResponseRedirect('/')
-            elif len(listed_files) > 1:
-                s = io.BytesIO()
-                with zipfile.ZipFile(s, 'w') as zipf:
-                    for file in listed_files:
-                        zipf.write(os.path.join(servings_path, file), file)
-                response = HttpResponse(s.getvalue(), content_type='application/x-zip-compressed')
-                response['Content-Disposition'] = 'attachment; filename=files.zip'
-                return response
-            else:
+            elif len(listed_files) == 1:
                 file = listed_files[0]
                 response = FileResponse(open(os.path.join(servings_path, file), 'rb'), filename=file, as_attachment=True)
                 return response
+            else:
+                zipped = zip_files(servings_path, listed_files)
+                response = HttpResponse(zipped.getvalue(), content_type='application/x-zip-compressed')
+                response['Content-Disposition'] = 'attachment; filename=files.zip'
+                return response
+            
