@@ -24,12 +24,13 @@
             <a href="serving">
                 <button>Download</button>
             </a>
-            
+            <p id="download_message"></p>
         </div>
     <script>
         var checkIcon = "{% static 'icons/check.svg' %}";
     </script>
     {{ status|json_script:"status" }}
+    {{ download_status|json_script:"download_status" }}
     <script src="{% static 'index.js' %}"></script>
     </body>
 </html>

@@ -1,10 +1,17 @@
 var up_status = parseInt(document.getElementById('status').textContent);
-statusMessage = document.getElementById("message");
+status_message = document.getElementById("message");
+
+var download_status = parseInt(document.getElementById('download_status').textContent);
+download_status_message = document.getElementById("download_message");
 
 if (up_status == 1){
-    statusMessage.innerHTML = "Successful Upload"
+    status_message.innerHTML = "Successful Upload"
 }else if(up_status == -1){
-    statusMessage.innerHTML = "Something went wrong"
+    status_message.innerHTML = "Something went wrong"
+}
+
+if(download_status == 0){
+    download_status_message.innerHTML = "No files to download on server"
 }
 
 //check cached selection from browser
