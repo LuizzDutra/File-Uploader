@@ -7,7 +7,7 @@ import zipfile
 
 
 class MainPage:
-    context = {'fileForm': forms.ModelFileForm(), 'status': 0}
+    context = {'fileForm': forms.ModelFileForm(), 'status': 0, 'download_status': 1}
     def index(request):
         if request.method == "POST":
             fileForm = forms.ModelFileForm(request.POST, request.FILES)
@@ -21,6 +21,7 @@ class MainPage:
                 MainPage.context['status'] = -1
             return render(request, 'index.html', MainPage.context)
         if request.method == "GET":
+            MainPage.context['status'] = 0
             return render(request, 'index.html', MainPage.context)
 
     def get_servings(request):
@@ -28,7 +29,8 @@ class MainPage:
             servings_path = os.path.join(os.getcwd(), 'servings')
             listed_files = os.listdir(servings_path)
             if len(listed_files) == 0:
-                return HttpResponse("No files")
+                MainPage.context['download_status'] = 0
+                return HttpResponseRedirect('/')
             elif len(listed_files) > 1:
                 s = io.BytesIO()
                 with zipfile.ZipFile(s, 'w') as zipf:
