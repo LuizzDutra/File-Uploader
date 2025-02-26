@@ -24,13 +24,21 @@ def index(request):
 def get_servings(request):
     if request.method == "GET":
         servings_path = os.path.join(os.getcwd(), 'servings')
-        s = io.BytesIO()
-        with zipfile.ZipFile(s, 'w') as zipf:
-            for file in os.listdir(servings_path):
-                print(os.path.basename(os.path.join(servings_path, file)))
-                zipf.write(os.path.join(servings_path, file), file)
+        listed_files = os.listdir(servings_path)
+        if len(listed_files) == 0:
+            return HttpResponse("No files")
+        elif len(listed_files) > 1:
+            s = io.BytesIO()
+            with zipfile.ZipFile(s, 'w') as zipf:
+                for file in listed_files:
+                    print(os.path.basename(os.path.join(servings_path, file)))
+                    zipf.write(os.path.join(servings_path, file), file)
 
-        response = HttpResponse(s.getvalue(), content_type='application/x-zip-compressed')
-        response['Content-Disposition'] = 'attachment; filename=files.zip'
-        
-        return response
+            response = HttpResponse(s.getvalue(), content_type='application/x-zip-compressed')
+            response['Content-Disposition'] = 'attachment; filename=files.zip'
+            
+            return response
+        else:
+            file = listed_files[0]
+            response = FileResponse(open(os.path.join(servings_path, file), 'rb'), filename=file, as_attachment=True)
+            return response
