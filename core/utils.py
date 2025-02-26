@@ -1,7 +1,7 @@
 from io import BytesIO
 import zipfile, os
 
-def zip_files(files_path: list[str], files: list[str]) -> BytesIO:
+def zip_files(files_path: str, files: list[str]) -> BytesIO:
     """Given the path of the files and which files to zip\n
     Returns a BytesIO zip file."""
     zipped = BytesIO()
