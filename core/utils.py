@@ -1,5 +1,7 @@
+import os
+import zipfile
 from io import BytesIO
-import zipfile, os
+
 
 def zip_files(files_path: str, files: list[str]) -> BytesIO:
     """Given the path of the files and which files to zip\n
